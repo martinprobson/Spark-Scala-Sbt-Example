@@ -5,14 +5,6 @@ val spark = Seq(
   "org.apache.spark" %% "spark-sql" % sparkVersion % Provided
 )
 
-//val logging = Seq(
-//  "org.slf4j" % "slf4j-api" % "2.0.0-alpha4",
-//  "org.slf4j" % "slf4j-log4j12" % "2.0.0-alpha4",
-//  "org.apache.logging.log4j" % "log4j" % "2.17.0" ,
-//  "org.apache.logging.log4j" % "log4j-slf4j-impl" % "2.17.0",
-//  "org.clapper" %% "grizzled-slf4j" % "1.3.4"
-//)
-
 val logging = Seq(
   "org.slf4j" % "slf4j-api" % "2.0.0-alpha4",
   "ch.qos.logback" % "logback-classic" % "1.3.0-alpha10",
