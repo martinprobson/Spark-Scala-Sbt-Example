@@ -1,9 +1,11 @@
-val sparkVersion = "3.2.0"
+val sparkVersion = "2.3.2"
 
 val spark = Seq(
   "org.apache.spark" %% "spark-core" % sparkVersion % Provided,
   "org.apache.spark" %% "spark-sql" % sparkVersion % Provided
 )
+
+val mysql = Seq("mysql" % "mysql-connector-java" % "8.0.22")
 
 val logging = Seq(
   "org.slf4j" % "slf4j-api" % "2.0.0-alpha4",
@@ -27,8 +29,9 @@ lazy val spark_example = (project in file("."))
     libraryDependencies ++= logging,
     libraryDependencies ++= spark,
     libraryDependencies ++= config,
+    libraryDependencies ++= mysql,
     libraryDependencies ++= test,
-    scalaVersion := "2.13.6"
+    scalaVersion := "2.11.12"
   )
 
 //set spark_example / Test / classLoaderLayeringStrategy := ClassLoaderLayeringStrategy.Flat
@@ -37,11 +40,10 @@ scalacOptions ++= Seq(
   "-deprecation", // Emit warning and location for usages of deprecated APIs.
   "-explaintypes", // Explain type errors in more detail.
   "-Xfatal-warnings", // Fail the compilation if there are any warnings.
-  "-Xsource:3", // Warn for Scala 3 features
   "-Ywarn-dead-code" // Warn when dead code is identified.
 )
 
-javacOptions ++= Seq("-source", "11", "-target", "11", "-Xlint")
+javacOptions ++= Seq("-source", "8", "-target", "8", "-Xlint")
 
 assembly / assemblyShadeRules := Seq(
   ShadeRule.rename("org.apache.kafka.**" -> "kk.@1").inAll,
