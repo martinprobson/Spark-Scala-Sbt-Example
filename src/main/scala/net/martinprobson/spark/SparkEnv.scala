@@ -34,6 +34,7 @@ trait SparkEnv {
   private def getSession: SparkSession = {
     val sparkSession = SparkSession
       .builder()
+      .config("spark.sql.orc.impl", "native")
       .appName(conf.getString("spark_example.app_name"))
       .getOrCreate()
     sparkSession
