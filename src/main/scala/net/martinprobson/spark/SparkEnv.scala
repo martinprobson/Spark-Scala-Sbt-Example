@@ -28,13 +28,13 @@ trait SparkEnv {
 
   /** Return spark session object
     *
-    * NOTE Add .master("local") to enable debug via an IDE or add as a VM option at runtime
-    * -Dspark.master="local[*]"
     */
   private def getSession: SparkSession = {
     val sparkSession = SparkSession
       .builder()
+      .master(conf.getString("spark_example.master"))
       .appName(conf.getString("spark_example.app_name"))
+      .config("spark.driver.bindAddress","127.0.0.1")
       .getOrCreate()
     sparkSession
   }

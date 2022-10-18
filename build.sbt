@@ -36,7 +36,7 @@ lazy val spark_example = (project in file("."))
     libraryDependencies ++= kafka,
     libraryDependencies ++= utils,
     libraryDependencies ++= test,
-    scalaVersion := "2.12.8"
+    scalaVersion := "2.12.15"
   )
 
 //set spark_example / Test / classLoaderLayeringStrategy := ClassLoaderLayeringStrategy.Flat
