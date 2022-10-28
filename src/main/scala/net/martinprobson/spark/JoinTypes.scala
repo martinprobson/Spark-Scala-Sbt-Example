@@ -87,6 +87,22 @@ object JoinTypes extends App with SparkEnv {
 
   empsDF.join(deptsDF,Seq("deptno"),"anti").show()
 
+  println("Anti Join - Alternate syntax for SQL that does not support ANTI JOIN directly")
+  spark.sparkContext.setJobDescription("Anti Join - alternate")
+  spark.sql(
+    """SELECT employee.deptNo, id, name
+      |FROM employee
+      |LEFT JOIN department ON employee.deptno = department.deptno
+      |WHERE department.deptno IS NULL;
+      |""".stripMargin).show()
+
+  empsDF
+          .alias("emp")
+          .join(deptsDF.alias("department"),$"emp.deptNo" === $"department.deptNo","left")
+          .where("department.deptNo is null")
+          .select($"emp.deptNo",$"id",$"name")
+          .show()
+
   scala.io.StdIn.readLine()
   spark.stop()
 }
